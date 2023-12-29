@@ -41,7 +41,7 @@ app.get('/joinGame/:pin', (req: Request, res: Response) => {
     return;
   }
 
-  res.send({ msg: "You've joined a game!" });
+  res.json({ msg: "You've joined a game!" });
 });
 
 app.listen(port, () => {
