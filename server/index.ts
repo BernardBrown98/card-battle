@@ -1,6 +1,6 @@
 import cors from 'cors';
 import express, { Express, Request, Response } from 'express';
-import { HttpStatusCodes, generateRandomDigit } from './utilities';
+import { HttpStatusCodes, generateRandomDigit, randomDeck } from './utilities';
 
 const app: Express = express();
 const port = 3000;
@@ -19,7 +19,7 @@ app.get('/test', (req: Request, res: Response) => {
 app.get('/hostGame', (req: Request, res: Response) => {
   const randomPin = `${generateRandomDigit()}${generateRandomDigit()}${generateRandomDigit()}${generateRandomDigit()}`;
   console.log(`API generated ${randomPin}`);
-  res.json({ pin: randomPin });
+  res.json({ pin: randomPin, randomDeck });
 });
 
 app.get('/joinGame/:pin', (req: Request, res: Response) => {
