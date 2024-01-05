@@ -9,7 +9,12 @@ type Data = {
   randomDeck: randomDeck[];
 };
 export const useFetch = (url: string) => {
-  const [data, setData] = useState<Data>({ randomDeck: [{ attack: 0, health: 0, title: '' }] });
+  const [data, setData] = useState<Data>({
+    randomDeck: [
+      { attack: 0, health: 0, title: '' },
+      { attack: 0, health: 0, title: '' },
+    ],
+  });
 
   useEffect(() => {
     fetch(url)
