@@ -1,5 +1,5 @@
-import { Container, CssBaseline, Box, Typography, Stack } from '@mui/material';
-import { Card } from '../components/Card';
+import { Box, Container, CssBaseline, Stack, Typography } from '@mui/material';
+import { GameCard } from '../components';
 import { useFetch } from '../hooks/useFetch';
 export const Home = () => {
   const { data } = useFetch('http://localhost:3000/hostGame');
@@ -14,8 +14,8 @@ export const Home = () => {
           alignItems={'start'}
           sx={{ position: 'absolute', left: '50%', transform: 'translateX(-50%)', top: '50px' }}
         >
-          <Card title={data[0].title} attack={data[0].attack} health={data[0].health} />
-          <Card title={data[1].title} attack={data[1].attack} health={data[1].health} />
+          <GameCard title={data[0].title} attack={data[0].attack} health={data[0].health} />
+          <GameCard title={data[1].title} attack={data[1].attack} health={data[1].health} />
         </Stack>
         <Stack
           direction={'column'}
