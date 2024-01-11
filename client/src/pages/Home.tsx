@@ -1,70 +1,52 @@
-import { Box, Container, CssBaseline, Stack, Typography } from '@mui/material';
-import { GameCard } from '../components';
-import { useFetch } from '../hooks/useFetch';
+import { Container, CssBaseline, StepLabel, Stepper, TextField, Typography } from '@mui/material';
+import { useState } from 'react';
+import { MIN_USERNAME_LENGTH } from './constants';
+import { StyledButton, StyledHeader, StyledStep, StyledVerticalContainer } from './styled';
+
 export const Home = () => {
-  const { data } = useFetch('http://localhost:3000/hostGame');
+  const [currentStepIndex, setCurrentStepIndex] = useState(0);
+  const [usernameInputValue, setUsernameInputValue] = useState('');
+
   return (
     <>
       <CssBaseline />
       <Container maxWidth="md">
-        <Stack
-          direction={'row'}
-          spacing={10}
-          justifyContent={'center'}
-          alignItems={'start'}
-          sx={{ position: 'absolute', left: '50%', transform: 'translateX(-50%)', top: '50px' }}
-        >
-          <GameCard title={data[0].title} attack={data[0].attack} health={data[0].health} />
-          <GameCard title={data[1].title} attack={data[1].attack} health={data[1].health} />
-        </Stack>
-        <Stack
-          direction={'column'}
-          justifyContent={'center'}
-          sx={{
-            height: '100vh',
-            bgcolor: 'darkgrey',
-          }}
-        >
-          <Typography textAlign={'center'} sx={{ typography: { xs: 'h2', sm: 'h1' }, mb: { xs: '20px', sm: '30px' } }}>
-            Card Battle
-          </Typography>
-          <Stack
-            direction={{ xs: 'column', sm: 'row' }}
-            spacing={{ xs: '20px', sm: '50px' }}
-            justifyContent={'center'}
-            alignContent={'center'}
-          >
-            <Box
-              sx={{
-                cursor: 'pointer',
-                alignSelf: 'center',
-                boxShadow: '-3px 0 0 0 black, 3px 0 0 0 black, 0 -3px 0 0 black, 0 3px 0 0 black',
-                border: 'solid black',
-                px: '40px',
-                py: '5px',
-                typography: 'h5',
-                ':hover': { transform: 'translateY(-4px)' },
-              }}
-              onClick={() => console.log(data)}
-            >
-              Host Game
-            </Box>
-            <Box
-              sx={{
-                cursor: 'pointer',
-                alignSelf: 'center',
-                boxShadow: '-3px 0 0 0 black, 3px 0 0 0 black, 0 -3px 0 0 black, 0 3px 0 0 black',
-                border: 'solid black',
-                px: '40px',
-                py: '5px',
-                typography: 'h5',
-                ':hover': { transform: 'translateY(-4px)' },
-              }}
-            >
-              Join Game
-            </Box>
-          </Stack>
-        </Stack>
+        <StyledHeader sx={{ typography: { xs: 'h2', sm: 'h1' }, mb: { xs: '20px', sm: '30px' } }}>
+          Card Battle
+        </StyledHeader>
+        <Stepper activeStep={currentStepIndex}>
+          <StyledStep>
+            <StepLabel>Enter Username</StepLabel>
+          </StyledStep>
+          <StyledStep>
+            <StepLabel>Play</StepLabel>
+          </StyledStep>
+        </Stepper>
+
+        {currentStepIndex === 0 ? (
+          <>
+            <StyledVerticalContainer spacing={3}>
+              <Typography variant="h3">Enter Username</Typography>
+              <TextField
+                required
+                label="Username"
+                variant="standard"
+                error={usernameInputValue !== '' && usernameInputValue.length < MIN_USERNAME_LENGTH}
+                helperText="Your username must be at least 4 characters."
+                onChange={(event) => setUsernameInputValue(event.target.value)}
+              />
+              <StyledButton
+                variant="outlined"
+                disabled={usernameInputValue === '' || usernameInputValue.length < MIN_USERNAME_LENGTH}
+                onClick={() => setCurrentStepIndex((currentStep) => currentStep + 1)}
+              >
+                Next
+              </StyledButton>
+            </StyledVerticalContainer>
+          </>
+        ) : (
+          <div>Second step</div>
+        )}
       </Container>
     </>
   );
