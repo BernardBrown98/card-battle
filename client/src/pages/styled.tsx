@@ -13,6 +13,7 @@ export const StyledStep = styled(Step)`
 `;
 
 export const StyledButton = styled(Button)`
+  height: 56px;
   width: 200px;
   color: black;
   border-color: black;

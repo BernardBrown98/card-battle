@@ -1,11 +1,32 @@
-import { Container, CssBaseline, StepLabel, Stepper, TextField, Typography } from '@mui/material';
-import { useState } from 'react';
-import { MIN_USERNAME_LENGTH } from './constants';
+import { Container, CssBaseline, Stack, StepLabel, Stepper, TextField, Typography } from '@mui/material';
+import { useEffect, useState } from 'react';
+import { MIN_GAME_PIN_LENGTH, MIN_USERNAME_LENGTH } from './constants';
 import { StyledButton, StyledHeader, StyledStep, StyledVerticalContainer } from './styled';
 
 export const Home = () => {
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
   const [usernameInputValue, setUsernameInputValue] = useState('');
+  const [gamePinInputValue, setGamePinInputValue] = useState('');
+  const [gamePinInputHelperText, setGamePinInputHelperText] = useState('');
+
+  useEffect(() => {
+    if (gamePinInputValue === '') {
+      setGamePinInputHelperText('');
+      return;
+    }
+    const numbersOnlyRegex = /^\d+$/;
+    if (!numbersOnlyRegex.test(gamePinInputValue)) {
+      setGamePinInputHelperText(`Game pin must only be numerical values.`);
+      return;
+    }
+    if (gamePinInputValue.length !== MIN_GAME_PIN_LENGTH) {
+      setGamePinInputHelperText(`Game pin must be ${MIN_GAME_PIN_LENGTH} characters.`);
+      return;
+    }
+
+    setGamePinInputHelperText('');
+    return;
+  }, [gamePinInputValue]);
 
   return (
     <>
@@ -45,7 +66,24 @@ export const Home = () => {
             </StyledVerticalContainer>
           </>
         ) : (
-          <div>Second step</div>
+          <StyledVerticalContainer spacing={4}>
+            <Typography variant="h3">How Do You Want To Play?</Typography>
+            <StyledButton variant="outlined" onClick={() => console.log('Host game button button clicked')}>
+              Host Game
+            </StyledButton>
+            <Stack direction="row" spacing={4}>
+              <TextField
+                label="Game Pin"
+                variant="outlined"
+                error={gamePinInputHelperText !== ''}
+                helperText={gamePinInputHelperText}
+                onChange={(event) => setGamePinInputValue(event.target.value)}
+              />
+              <StyledButton variant="outlined" onClick={() => console.log('Join game button button clicked')}>
+                Join Game
+              </StyledButton>
+            </Stack>
+          </StyledVerticalContainer>
         )}
       </Container>
     </>
