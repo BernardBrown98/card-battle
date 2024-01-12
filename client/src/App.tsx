@@ -1,9 +1,6 @@
 import { createTheme, ThemeProvider } from '@mui/material';
-// type Data = {
-//   msg?: string;
-// };
-
 import { Home } from './pages/Home';
+import { Sockets } from './components/SocketsTest/Sockets';
 
 function App() {
   // const [data, setData] = useState<Data>({});
@@ -24,6 +21,7 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <Home />
+      <Sockets />
     </ThemeProvider>
   );
 }
