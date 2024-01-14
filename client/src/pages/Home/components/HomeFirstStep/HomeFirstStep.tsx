@@ -1,6 +1,6 @@
 import { TextField, Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
-import { StyledButton, StyledVerticalContainer } from '../../styled';
+import { StyledButton, StyledVerticalContainer } from '../../../../styled';
 import { MIN_USERNAME_LENGTH } from './constants';
 
 interface HomeFirstStepProps {

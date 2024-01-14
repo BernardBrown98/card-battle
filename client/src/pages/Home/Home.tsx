@@ -1,6 +1,6 @@
 import { Container, CssBaseline, StepLabel, Stepper } from '@mui/material';
 import { useState } from 'react';
-import { HomeFirstStep, HomeSecondStep } from '../components';
+import { HomeFirstStep, HomeSecondStep } from './components';
 import { StyledHeader, StyledStep } from './styled';
 
 export const Home = () => {

@@ -1,10 +1,10 @@
 import { Stack, TextField } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { GameData } from '../..';
-import { SERVER_ROOT_URL } from '../../../../constants';
-import { ApiError, useFetch } from '../../../../hooks';
-import { StyledButton } from '../../../../styled';
-import { MIN_GAME_PIN_LENGTH } from '../../constants';
+import { SERVER_ROOT_URL } from '../../../../../../constants';
+import { ApiError, useFetch } from '../../../../../../hooks';
+import { StyledButton } from '../../../../../../styled';
+import { MIN_GAME_PIN_LENGTH } from './constants';
 
 interface JoinGameProps {
   onClick: () => void;

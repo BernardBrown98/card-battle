@@ -1,8 +1,8 @@
 import { CircularProgress, Typography } from '@mui/material';
 import { useState } from 'react';
 import { Snackbar } from '..';
-import { ApiError } from '../../hooks/useFetch';
-import { StyledVerticalContainer } from '../../styled';
+import { ApiError } from '../../../../hooks';
+import { StyledVerticalContainer } from '../../../../styled';
 import { HostGame, JoinGame } from './components';
 
 export const HomeSecondStep = () => {

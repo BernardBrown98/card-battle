@@ -1,8 +1,8 @@
 import cors from 'cors';
 import express, { Express, Request, Response } from 'express';
-import { HttpStatusCodes, generateRandomDeck, generateRandomNumber } from './utilities';
-import { Server } from 'socket.io';
 import { createServer } from 'http';
+import { Server } from 'socket.io';
+import { HttpStatusCodes, generateRandomDeck, generateRandomNumber } from './utilities';
 
 const corsOptions = {
   origin: ['http://localhost:5173'],
