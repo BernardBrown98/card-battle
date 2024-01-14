@@ -1,28 +1,31 @@
-import { useState, useEffect } from 'react';
-type randomDeck = {
-  title: string;
-  attack: number;
-  health: number;
-};
+import { useState } from 'react';
 
-type Data = {
-  randomDeck: randomDeck[];
-};
-export const useFetch = (url: string) => {
-  const [data, setData] = useState<Data>({
-    randomDeck: [
-      { attack: 0, health: 0, title: '' },
-      { attack: 0, health: 0, title: '' },
-    ],
-  });
+interface StatusNotifications {
+  onSuccess?: () => void;
+  onError?: (error: ApiError) => void;
+}
+export interface ApiError {
+  msg: string;
+}
 
-  useEffect(() => {
-    fetch(url)
-      .then((res) => {
-        console.log(res);
-        return res.json();
-      })
-      .then((data) => setData(data));
-  }, [url]);
-  return { data: data.randomDeck };
+export const useFetch = <T>(url: string, { onSuccess, onError }: StatusNotifications = {}) => {
+  const [isLoading, setIsLoading] = useState(false);
+  const [data, setData] = useState<T | undefined>(undefined);
+
+  const doFetch = async () => {
+    setIsLoading(true);
+    const res = await fetch(url);
+    const data = (await res.json()) as T | ApiError;
+    if (res.status !== 200) {
+      onError?.(data as ApiError);
+      setIsLoading(false);
+      return;
+    }
+
+    setData(data as T);
+    setIsLoading(false);
+    onSuccess?.();
+  };
+
+  return { isLoading, data, fetch: doFetch };
 };
