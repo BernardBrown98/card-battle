@@ -1,7 +1,7 @@
 import { GameData } from '../..';
-import { SERVER_ROOT_URL } from '../../../../constants';
-import { ApiError, useFetch } from '../../../../hooks';
-import { StyledButton } from '../../../../styled';
+import { SERVER_ROOT_URL } from '../../../../../../constants';
+import { ApiError, useFetch } from '../../../../../../hooks';
+import { StyledButton } from '../../../../../../styled';
 
 interface HostGameProps {
   onClick: () => void;

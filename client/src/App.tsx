@@ -1,6 +1,6 @@
 import { createTheme, ThemeProvider } from '@mui/material';
-import { Home } from './pages/Home';
 import { Sockets } from './components/SocketsTest/Sockets';
+import { Home } from './pages/Home/Home';
 
 function App() {
   // const [data, setData] = useState<Data>({});

@@ -2,12 +2,17 @@ import { Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { io } from 'socket.io-client';
 
+const socket = io('http://localhost:3000');
+
 export const Sockets = () => {
   const [socketId, setSocketId] = useState<string>();
-  const socket = io('http://localhost:3000');
 
   useEffect(() => {
-    socket.on('connect', () => setSocketId(socket.id));
+    console.log('effect');
+    socket.on('connect', () => {
+      console.log(`socket is ${socket.id}`);
+      setSocketId(socket.id);
+    });
   }, []);
 
   return (
